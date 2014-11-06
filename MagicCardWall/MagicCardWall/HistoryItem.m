@@ -19,6 +19,7 @@
         _timestamp = dictionary[@"Timestamp"];
         _status = dictionary[@"Status"];
         _avatarUrl = dictionary[@"AvatarUrl"];
+        _username = dictionary[@"Username"];
     }
     
     return self;

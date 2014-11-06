@@ -47,6 +47,7 @@
         if (success) {
             NSString *token = dictionary[@"Token"];
             [Lockbox setString:token forKey:@"Token"];
+            [Lockbox setString:username forKey:@"Username"];
             [self.requestSerializer setValue:token forHTTPHeaderField:@"Cookie"];
             completion(YES, nil);
         }
