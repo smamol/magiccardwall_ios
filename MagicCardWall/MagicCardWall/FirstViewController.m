@@ -13,6 +13,9 @@
 @interface FirstViewController () <AVCaptureMetadataOutputObjectsDelegate>
 
 @property (strong) AVCaptureSession *captureSession;
+@property (strong) AVCaptureVideoPreviewLayer *previewLayer;
+
+@property (weak, nonatomic) IBOutlet UILabel *labelQRCodeResult;
 
 @end
 
@@ -50,11 +53,11 @@
     AVCaptureMetadataOutput *metadataOutput = [[AVCaptureMetadataOutput alloc] init];
     [self.captureSession addOutput:metadataOutput];
     [metadataOutput setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
-    [metadataOutput setMetadataObjectTypes:@[AVMetadataObjectTypeQRCode, AVMetadataObjectTypeEAN13Code]];
+    [metadataOutput setMetadataObjectTypes:@[AVMetadataObjectTypeQRCode]];
     
-    AVCaptureVideoPreviewLayer *previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.captureSession];
-    previewLayer.frame = self.view.layer.bounds;
-    [self.view.layer addSublayer:previewLayer];
+    self.previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.captureSession];
+    self.previewLayer.frame = self.view.layer.bounds;
+    [self.view.layer addSublayer:self.previewLayer];
     
     [self.captureSession startRunning];
 }
@@ -74,6 +77,11 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
     }
     
     NSLog(@"QR Code: %@", QRCode);
+    self.labelQRCodeResult.text = QRCode;
+    
+    [self.previewLayer removeFromSuperlayer];
+    [self.captureSession stopRunning];
 }
+
 
 @end

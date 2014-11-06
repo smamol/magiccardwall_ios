@@ -29,14 +29,26 @@
                                     <action selector="touchedButtonScan:" destination="9pv-A4-QxB" eventType="touchUpInside" id="dif-QW-rne"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Code Scanned" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L82-ay-sCS">
+                                <rect key="frame" x="229" y="323" width="142" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="L82-ay-sCS" firstAttribute="top" secondItem="rl8-Nr-eS9" secondAttribute="bottom" constant="8" symbolic="YES" id="2cS-3P-heq"/>
+                            <constraint firstAttribute="centerX" secondItem="L82-ay-sCS" secondAttribute="centerX" id="BUy-5r-hwf"/>
+                            <constraint firstItem="L82-ay-sCS" firstAttribute="centerX" secondItem="rl8-Nr-eS9" secondAttribute="centerX" id="VdU-gg-WcK"/>
                             <constraint firstAttribute="centerY" secondItem="rl8-Nr-eS9" secondAttribute="centerY" id="l94-8T-EW1"/>
                             <constraint firstAttribute="centerX" secondItem="rl8-Nr-eS9" secondAttribute="centerX" id="yvH-94-MOp"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Magic Scan" image="first" id="acW-dT-cKf"/>
+                    <connections>
+                        <outlet property="labelQRCodeResult" destination="L82-ay-sCS" id="hHd-c6-q9p"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
