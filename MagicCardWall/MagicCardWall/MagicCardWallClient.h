@@ -14,8 +14,7 @@
 
 - (void)loginWithUsername:(NSString *)username password:(NSString *)password completion:(void (^)(BOOL success, NSError *error))completion;
 
-- (void)incrementStateForTask:(NSString *)taskIdentifier completion:(void (^)(BOOL success, NSError *error))completion;
+- (void)incrementStateForTask:(NSString *)taskIdentifier undo:(BOOL)undo completion:(void (^)(BOOL success, NSError *error))completion;
 
-- (void)decrementStateForTask:(NSString *)taskIdentifier completion:(void (^)(BOOL success, NSError *error))completion;
 
 @end

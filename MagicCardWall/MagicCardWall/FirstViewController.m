@@ -100,7 +100,7 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
     
     [self.captureSession stopRunning];
     
-    [[MagicCardWallClient sharedInstance] incrementStateForTask:QRCode completion:^(BOOL success, NSError *error) {
+    [[MagicCardWallClient sharedInstance] incrementStateForTask:QRCode undo:NO completion:^(BOOL success, NSError *error) {
         if (success) {
             [self playScanSound];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

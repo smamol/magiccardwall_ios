@@ -28,7 +28,8 @@
     
     if (self) {
         self.requestSerializer = [AFJSONRequestSerializer serializer];
-        self.responseSerializer = [AFJSONResponseSerializer serializer];
+        self.responseSerializer = [AFCompoundResponseSerializer compoundSerializerWithResponseSerializers:
+                                   @[[AFJSONResponseSerializer serializer],[AFHTTPResponseSerializer serializer]]];
     }
     
     return self;
@@ -58,15 +59,18 @@
     }];
 }
 
-- (void)incrementStateForTask:(NSString *)taskIdentifier completion:(void (^)(BOOL success, NSError *error))completion {
+- (void)incrementStateForTask:(NSString *)taskIdentifier undo:(BOOL)undo completion:(void (^)(BOOL success, NSError *error))completion {
     
     [self.requestSerializer setValue:[Lockbox stringForKey:@"Token"] forHTTPHeaderField:@"Cookie"];
         
-    [self POST:@"/api/Status" parameters:@{@"issueId" : taskIdentifier} success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self POST:[NSString stringWithFormat:@"/api/Status?issueId=%@&undo=%@", taskIdentifier, undo ? @"true" : @"false"] parameters:@{} success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSLog(@"%@", task);
+        NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+
+        NSLog(@"%i", [responseString boolValue]);
         
-        completion(YES, nil);
+        completion([responseString boolValue], nil);
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"%@", [error localizedDescription]);
@@ -74,13 +78,5 @@
     }];
 }
 
-- (void)decrementStateForTask:(NSString *)taskIdentifier completion:(void (^)(BOOL success, NSError *error))completion {
-    [self POST:@"/api/Status" parameters:@{@"issueId" : taskIdentifier, @"undo" : @"true"} success:^(NSURLSessionDataTask *task, id responseObject) {
-        completion(YES, nil);
-        
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        completion(NO, error);
-    }];
-}
 
 @end
