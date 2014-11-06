@@ -31,24 +31,82 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Code Scanned" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L82-ay-sCS">
-                                <rect key="frame" x="229" y="323" width="142" height="21"/>
+                                <rect key="frame" x="229" y="323" width="141.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="996-Yb-jyu">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pVg-p0-3Pa">
+                                        <rect key="frame" x="8" y="8" width="48" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="0q8-Ah-zo0"/>
+                                            <constraint firstAttribute="width" constant="48" id="8wF-iS-Vw8"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your task has been moved successfully" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chJ-Xa-I0R">
+                                        <rect key="frame" x="64" y="8" width="528" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="L6t-wT-yaP"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="chJ-Xa-I0R" secondAttribute="trailing" constant="8" id="6OQ-cF-V4t"/>
+                                    <constraint firstItem="chJ-Xa-I0R" firstAttribute="leading" secondItem="996-Yb-jyu" secondAttribute="leading" constant="64" id="6Sk-5A-Y7F"/>
+                                    <constraint firstItem="chJ-Xa-I0R" firstAttribute="top" secondItem="996-Yb-jyu" secondAttribute="top" constant="8" id="BHv-QP-4ro"/>
+                                    <constraint firstItem="pVg-p0-3Pa" firstAttribute="top" secondItem="996-Yb-jyu" secondAttribute="top" constant="8" id="RoF-DF-yJZ"/>
+                                    <constraint firstItem="pVg-p0-3Pa" firstAttribute="leading" secondItem="996-Yb-jyu" secondAttribute="leading" constant="8" id="SsL-al-YO9"/>
+                                    <constraint firstAttribute="height" constant="64" id="pM7-kr-e0W"/>
+                                    <constraint firstAttribute="trailing" secondItem="pVg-p0-3Pa" secondAttribute="trailing" constant="544" id="tTy-06-K8V"/>
+                                </constraints>
+                            </view>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wtd-W1-Kex">
+                                <rect key="frame" x="149" y="150" width="300" height="300"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan code to move task" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0DN-Sv-qgD">
+                                        <rect key="frame" x="57" y="139" width="187" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="BTH-Fc-DWa"/>
+                                    <constraint firstAttribute="centerX" secondItem="0DN-Sv-qgD" secondAttribute="centerX" constant="-0.5" id="SrR-7x-I2U"/>
+                                    <constraint firstAttribute="centerY" secondItem="0DN-Sv-qgD" secondAttribute="centerY" constant="0.5" id="ikq-0h-osE"/>
+                                    <constraint firstAttribute="width" constant="300" id="q35-iW-UMP"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="L82-ay-sCS" firstAttribute="top" secondItem="rl8-Nr-eS9" secondAttribute="bottom" constant="8" symbolic="YES" id="2cS-3P-heq"/>
+                            <constraint firstAttribute="trailing" secondItem="996-Yb-jyu" secondAttribute="trailing" id="3yz-42-U1v"/>
+                            <constraint firstItem="996-Yb-jyu" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="5e8-tO-lSX"/>
                             <constraint firstAttribute="centerX" secondItem="L82-ay-sCS" secondAttribute="centerX" id="BUy-5r-hwf"/>
+                            <constraint firstAttribute="centerX" secondItem="Wtd-W1-Kex" secondAttribute="centerX" constant="1" id="OhB-Oy-QqN"/>
                             <constraint firstItem="L82-ay-sCS" firstAttribute="centerX" secondItem="rl8-Nr-eS9" secondAttribute="centerX" id="VdU-gg-WcK"/>
+                            <constraint firstItem="996-Yb-jyu" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="-20" id="fsF-aK-M1E"/>
                             <constraint firstAttribute="centerY" secondItem="rl8-Nr-eS9" secondAttribute="centerY" id="l94-8T-EW1"/>
+                            <constraint firstAttribute="centerY" secondItem="Wtd-W1-Kex" secondAttribute="centerY" id="s52-xm-Rgc"/>
                             <constraint firstAttribute="centerX" secondItem="rl8-Nr-eS9" secondAttribute="centerX" id="yvH-94-MOp"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Magic Scan" image="first" id="acW-dT-cKf"/>
                     <connections>
+                        <outlet property="imageViewStatus" destination="pVg-p0-3Pa" id="cww-pm-ri4"/>
                         <outlet property="labelQRCodeResult" destination="L82-ay-sCS" id="hHd-c6-q9p"/>
+                        <outlet property="labelStatus" destination="chJ-Xa-I0R" id="ZBV-T8-vYW"/>
+                        <outlet property="viewStatusContainer" destination="996-Yb-jyu" id="NTV-D1-XDn"/>
+                        <outlet property="viewViewFinderContainer" destination="Wtd-W1-Kex" id="eyr-uo-rOG"/>
                         <segue destination="53h-aS-5xq" kind="presentation" identifier="login" id="x6g-UR-9mh"/>
                     </connections>
                 </viewController>

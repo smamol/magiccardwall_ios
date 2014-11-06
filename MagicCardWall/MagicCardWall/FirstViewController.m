@@ -22,6 +22,10 @@
 @property SystemSoundID scanSound;
 
 @property (weak, nonatomic) IBOutlet UILabel *labelQRCodeResult;
+@property (weak, nonatomic) IBOutlet UIView *viewViewFinderContainer;
+@property (weak, nonatomic) IBOutlet UIView *viewStatusContainer;
+@property (weak, nonatomic) IBOutlet UILabel *labelStatus;
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewStatus;
 
 @end
 
@@ -82,12 +86,25 @@
 
 - (void)startScanning {
     [self.view.layer addSublayer:self.previewLayer];
+    
+    [self.view bringSubviewToFront:self.viewStatusContainer];
+    [self.view bringSubviewToFront:self.viewViewFinderContainer];
+    
     [self.captureSession startRunning];
+    
+    [UIView animateWithDuration:0.2f animations:^{
+        self.viewViewFinderContainer.alpha = 1.0f;
+    }];
 }
 
 - (void)stopScanning {
-    [self.previewLayer removeFromSuperlayer];
     [self.captureSession stopRunning];
+    
+    [UIView animateWithDuration:0.2f animations:^{
+        self.viewViewFinderContainer.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        [self.previewLayer removeFromSuperlayer];
+    }];
 }
 
 #pragma mark - Shaky shaky
