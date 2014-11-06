@@ -79,6 +79,10 @@
     [self.captureSession startRunning];
 }
 
+- (void)viewWillLayoutSubviews {
+    self.previewLayer.frame = self.view.bounds;
+}
+
 #pragma mark - AVCaptureMetadataOutputObjectsDelegate
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput
@@ -97,15 +101,15 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
     self.labelQRCodeResult.text = QRCode;
     
     [self.previewLayer removeFromSuperlayer];
-    
     [self.captureSession stopRunning];
     
     [[MagicCardWallClient sharedInstance] incrementStateForTask:QRCode undo:NO completion:^(BOOL success, NSError *error) {
         if (success) {
             [self playScanSound];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 //-- start again after a couple of second (long enough to show the scan result)
                 [self.captureSession startRunning];
+                [self.view.layer addSublayer:self.previewLayer];
             });
         }
         else {
