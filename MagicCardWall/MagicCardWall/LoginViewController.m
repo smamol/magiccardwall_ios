@@ -28,8 +28,8 @@
 
 
 - (IBAction)touchedButtonLogin:(UIButton *)sender {
-    
-    MagicCardWallClient *client = [[MagicCardWallClient sharedInstance]];
+
+    MagicCardWallClient *client = [MagicCardWallClient sharedInstance];
     [client loginWithUsername:self.textFieldUsername.text password:self.textFieldPassword.text completion:^(BOOL success, NSError *error) {
         if (success) {
             NSLog(@"LOGGED IN!");

@@ -12,6 +12,7 @@
 #import "FirstViewController.h"
 
 #import "Lockbox.h"
+#import "MagicCardWallClient.h"
 
 @interface FirstViewController () <AVCaptureMetadataOutputObjectsDelegate>
 
@@ -97,9 +98,21 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
     
     [self.previewLayer removeFromSuperlayer];
     
-    [self playScanSound];
-    
     [self.captureSession stopRunning];
+    
+    [[MagicCardWallClient sharedInstance] incrementStateForTask:QRCode completion:^(BOOL success, NSError *error) {
+        if (success) {
+            [self playScanSound];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                //-- start again after a couple of second (long enough to show the scan result)
+                [self.captureSession startRunning];
+            });
+        }
+        else {
+            [self playErrorSound];
+        }
+    }];
+    
 }
 
 - (void)playScanSound {
@@ -108,6 +121,14 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)pewPewURL, &_scanSound);
     AudioServicesPlaySystemSound(self.scanSound);
 }
+
+- (void)playErrorSound {
+    NSString *scanSoundPath = [[NSBundle mainBundle] pathForResource:@"error_sound" ofType:@"wav"];
+    NSURL *pewPewURL = [NSURL fileURLWithPath:scanSoundPath];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)pewPewURL, &_scanSound);
+    AudioServicesPlaySystemSound(self.scanSound);
+}
+
 
 
 @end

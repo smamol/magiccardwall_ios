@@ -16,7 +16,7 @@
     static dispatch_once_t onceToken;
     static MagicCardWallClient *instance;
     dispatch_once(&onceToken, ^{
-        instance = [[MagicCardWallClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://tmlt218.trademe.local"]];
+        instance = [[MagicCardWallClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://tmlt218.trademe.local:8888"]];
     });
     
     return instance;
@@ -35,7 +35,11 @@
 }
 
 - (void)loginWithUsername:(NSString *)username password:(NSString *)password completion:(void (^)(BOOL success, NSError *error))completion {
+    
+    [self.requestSerializer setValue:[Lockbox stringForKey:@"Token"] forHTTPHeaderField:@"Cookie"];
+    
     [self POST:@"/api/Login" parameters:@{@"Username" : username, @"Password" : password} success:^(NSURLSessionDataTask *task, id responseObject) {
+        
         NSDictionary *dictionary = (NSDictionary *)responseObject;
         BOOL success = [dictionary[@"Success"] boolValue];
         
@@ -55,15 +59,24 @@
 }
 
 - (void)incrementStateForTask:(NSString *)taskIdentifier completion:(void (^)(BOOL success, NSError *error))completion {
-    [self POST:@"" parameters:@{@"taskIdentifier" : taskIdentifier} success:^(NSURLSessionDataTask *task, id responseObject) {
+    
+    [self.requestSerializer setValue:[Lockbox stringForKey:@"Token"] forHTTPHeaderField:@"Cookie"];
+        
+    [self POST:@"/api/Status" parameters:@{@"issueId" : taskIdentifier} success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSLog(@"%@", task);
+        
+        completion(YES, nil);
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"%@", [error localizedDescription]);
         completion(NO, error);
     }];
 }
 
 - (void)decrementStateForTask:(NSString *)taskIdentifier completion:(void (^)(BOOL success, NSError *error))completion {
-    [self POST:@"" parameters:@{@"taskIdentifier" : taskIdentifier} success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self POST:@"/api/Status" parameters:@{@"issueId" : taskIdentifier, @"undo" : @"true"} success:^(NSURLSessionDataTask *task, id responseObject) {
+        completion(YES, nil);
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         completion(NO, error);
