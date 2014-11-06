@@ -10,6 +10,8 @@
 
 @interface SecondViewController ()
 
+@property (weak, nonatomic) IBOutlet UILabel *labelShakeIt;
+
 @end
 
 @implementation SecondViewController
