@@ -114,10 +114,6 @@
 }
 
 #pragma mark - Rotation
-- (void)viewWillLayoutSubviews {
-    self.previewLayer.frame = self.view.bounds;
-}
-
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
     [CATransaction begin];
     [CATransaction setAnimationDuration:duration];
@@ -126,13 +122,7 @@
     [CATransaction commit];
 }
 
-- (void)updatePreviewLayerForOrientation:(UIInterfaceOrientation)interfaceOrientation;
-{
-    // correct position of previewLayer
-    CGSize newSize = self.view.bounds.size;
-    self.previewLayer.position = CGPointMake(0.5 * newSize.width, 0.5 * newSize.height);
-    
-    // rotate the previewLayer, in order to have camera picture right
+- (void)updatePreviewLayerForOrientation:(UIInterfaceOrientation)interfaceOrientation {
     switch (interfaceOrientation) {
         case UIInterfaceOrientationPortrait:
             [self.previewLayer setAffineTransform:CGAffineTransformMakeRotation(0)];
@@ -153,8 +143,9 @@
         default:
             break;
     }
+    
+    self.previewLayer.position = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));
 }
-
 
 #pragma mark - AVCaptureMetadataOutputObjectsDelegate
 
