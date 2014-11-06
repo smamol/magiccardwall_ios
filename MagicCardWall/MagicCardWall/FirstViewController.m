@@ -11,6 +11,8 @@
 
 #import "FirstViewController.h"
 
+#import "Lockbox.h"
+
 @interface FirstViewController () <AVCaptureMetadataOutputObjectsDelegate>
 
 @property (strong, nonatomic) AVCaptureSession *captureSession;
@@ -27,6 +29,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    // Should I log in?
+
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if ([[Lockbox stringForKey:@"Token"] length] <= 0) {
+        // force login
+        [self performSegueWithIdentifier:@"login" sender:self];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
