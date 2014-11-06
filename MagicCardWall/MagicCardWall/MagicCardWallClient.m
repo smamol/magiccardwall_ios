@@ -47,6 +47,7 @@
         if (success) {
             NSString *token = dictionary[@"Token"];
             [Lockbox setString:token forKey:@"Token"];
+            [self.requestSerializer setValue:token forHTTPHeaderField:@"Cookie"];
             completion(YES, nil);
         }
         else {
@@ -60,9 +61,6 @@
 }
 
 - (void)incrementStateForTask:(NSString *)taskIdentifier undo:(BOOL)undo completion:(void (^)(BOOL success, NSError *error))completion {
-    
-    [self.requestSerializer setValue:[Lockbox stringForKey:@"Token"] forHTTPHeaderField:@"Cookie"];
-        
     [self POST:[NSString stringWithFormat:@"/api/Status?issueId=%@&undo=%@", [taskIdentifier stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], undo ? @"true" : @"false"] parameters:@{} success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
@@ -74,6 +72,22 @@
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"%@", [error localizedDescription]);
         completion(NO, error);
+    }];
+}
+
+- (void)getHistoryWithCompletion:(void (^)(NSArray *arrayOfHistoryItems, NSError *error))completion {
+    [self GET:@"/api/History" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSArray *arrayOfItems = (NSArray *)responseObject;
+        NSMutableArray *arrayOfProcessedItems = [[NSMutableArray alloc] init];
+        
+        for (NSDictionary *dictionary in arrayOfItems) {
+            [arrayOfProcessedItems addObject:[[HistoryItem alloc] initWithDictionary:dictionary]];
+        }
+        
+        completion(arrayOfProcessedItems, nil);
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        completion(nil, error);
     }];
 }
 

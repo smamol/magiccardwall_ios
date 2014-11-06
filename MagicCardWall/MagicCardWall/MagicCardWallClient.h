@@ -8,6 +8,8 @@
 
 #import "AFHTTPSessionManager.h"
 
+#import "HistoryItem.h"
+
 @interface MagicCardWallClient : AFHTTPSessionManager
 
 + (instancetype)sharedInstance;

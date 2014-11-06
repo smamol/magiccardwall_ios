@@ -21,6 +21,7 @@
 		5FDAC6821A0BFD9300D4AE96 /* error_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5FDAC6811A0BFD9300D4AE96 /* error_sound.wav */; };
 		5FDAC6861A0C117E00D4AE96 /* undo_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5FDAC6851A0C117E00D4AE96 /* undo_sound.wav */; };
 		F416022B1A0B4324001D8796 /* MagicCardWallClient.m in Sources */ = {isa = PBXBuildFile; fileRef = F416022A1A0B4324001D8796 /* MagicCardWallClient.m */; };
+		F416022F1A0C2573001D8796 /* HistoryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F416022E1A0C2573001D8796 /* HistoryItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,8 @@
 		5FDAC6851A0C117E00D4AE96 /* undo_sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = undo_sound.wav; sourceTree = "<group>"; };
 		F41602291A0B4324001D8796 /* MagicCardWallClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicCardWallClient.h; sourceTree = "<group>"; };
 		F416022A1A0B4324001D8796 /* MagicCardWallClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicCardWallClient.m; sourceTree = "<group>"; };
+		F416022D1A0C2573001D8796 /* HistoryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryItem.h; sourceTree = "<group>"; };
+		F416022E1A0C2573001D8796 /* HistoryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryItem.m; sourceTree = "<group>"; };
 		F4741EA5DD0D448AD988E57F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -120,6 +123,7 @@
 		5F677EE31A0AEC110045129E /* MagicCardWall */ = {
 			isa = PBXGroup;
 			children = (
+				F416022C1A0C254C001D8796 /* Model */,
 				F41602281A0B42DD001D8796 /* Networking */,
 				5F677EE81A0AEC110045129E /* AppDelegate.h */,
 				5F677EE91A0AEC110045129E /* AppDelegate.m */,
@@ -173,6 +177,15 @@
 				F416022A1A0B4324001D8796 /* MagicCardWallClient.m */,
 			);
 			name = Networking;
+			sourceTree = "<group>";
+		};
+		F416022C1A0C254C001D8796 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F416022D1A0C2573001D8796 /* HistoryItem.h */,
+				F416022E1A0C2573001D8796 /* HistoryItem.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,6 +326,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F416022F1A0C2573001D8796 /* HistoryItem.m in Sources */,
 				5F677EF01A0AEC110045129E /* SecondViewController.m in Sources */,
 				5F677EEA1A0AEC110045129E /* AppDelegate.m in Sources */,
 				5FBCC7001A0B66D60072843F /* LoginViewController.m in Sources */,
