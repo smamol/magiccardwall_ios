@@ -8,6 +8,55 @@
 
 #import "MagicCardWallClient.h"
 
+#import "Lockbox.h"
+
 @implementation MagicCardWallClient
+
+- (instancetype)initWithBaseURL:(NSURL *)url {
+    self = [super initWithBaseURL:url];
+    
+    if (self) {
+        self.requestSerializer = [AFJSONRequestSerializer serializer];
+        self.responseSerializer = [AFJSONResponseSerializer serializer];
+    }
+    
+    return self;
+}
+
+- (void)loginWithUsername:(NSString *)username password:(NSString *)password completion:(void (^)(BOOL success, NSError *error))completion {
+    [self POST:@"/api/Login" parameters:@{@"Username" : username, @"Password" : password} success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSDictionary *dictionary = (NSDictionary *)responseObject;
+        BOOL success = [dictionary[@"Success"] boolValue];
+        
+        if (success) {
+            NSString *token = dictionary[@"Token"];
+            [Lockbox setString:token forKey:@"Token"];
+            completion(YES, nil);
+        }
+        else {
+            NSString *errorMessage = dictionary[@"ErrorMessage"];
+            completion(NO, [NSError errorWithDomain:@"MCW" code:0 userInfo:@{NSLocalizedDescriptionKey : errorMessage}]);
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        completion(NO, error);
+    }];
+}
+
+- (void)incrementStateForTask:(NSString *)taskIdentifier completion:(void (^)(BOOL success, NSError *error))completion {
+    [self POST:@"" parameters:@{@"taskIdentifier" : taskIdentifier} success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        completion(NO, error);
+    }];
+}
+
+- (void)decrementStateForTask:(NSString *)taskIdentifier completion:(void (^)(BOOL success, NSError *error))completion {
+    [self POST:@"" parameters:@{@"taskIdentifier" : taskIdentifier} success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        completion(NO, error);
+    }];
+}
 
 @end

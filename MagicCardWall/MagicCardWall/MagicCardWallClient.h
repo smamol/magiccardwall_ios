@@ -10,4 +10,6 @@
 
 @interface MagicCardWallClient : AFHTTPSessionManager
 
+- (void)loginWithUsername:(NSString *)username password:(NSString *)password completion:(void (^)(BOOL success, NSError *error))completion;
+
 @end

@@ -8,6 +8,8 @@
 
 #import "SecondViewController.h"
 
+#import "MagicCardWallClient.h"
+
 @interface SecondViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *labelShakeIt;
@@ -37,6 +39,16 @@
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
     if (motion == UIEventSubtypeMotionShake) {
         self.labelShakeIt.text = @"I Shook It!";
+        
+        MagicCardWallClient *client = [[MagicCardWallClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://tmlt218.trademe.local"]];
+        [client loginWithUsername:@"scook" password:@"Masmall6" completion:^(BOOL success, NSError *error) {
+            if (success) {
+                NSLog(@"LOGGED IN!");
+            }
+            else {
+                NSLog(error.localizedDescription);
+            }
+        }];
     }
 }
 
