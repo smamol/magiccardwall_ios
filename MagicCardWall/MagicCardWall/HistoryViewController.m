@@ -6,17 +6,17 @@
 //  Copyright (c) 2014 Trade Me. All rights reserved.
 //
 
-#import "SecondViewController.h"
+#import "HistoryViewController.h"
 
 #import "MagicCardWallClient.h"
 
-@interface SecondViewController ()
+@interface HistoryViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *labelShakeIt;
 
 @end
 
-@implementation SecondViewController
+@implementation HistoryViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

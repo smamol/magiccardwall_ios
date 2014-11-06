@@ -11,7 +11,7 @@
 		5F677EE71A0AEC110045129E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F677EE61A0AEC110045129E /* main.m */; };
 		5F677EEA1A0AEC110045129E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F677EE91A0AEC110045129E /* AppDelegate.m */; };
 		5F677EED1A0AEC110045129E /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F677EEC1A0AEC110045129E /* FirstViewController.m */; };
-		5F677EF01A0AEC110045129E /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F677EEF1A0AEC110045129E /* SecondViewController.m */; };
+		5F677EF01A0AEC110045129E /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F677EEF1A0AEC110045129E /* HistoryViewController.m */; };
 		5F677EF31A0AEC110045129E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F677EF11A0AEC110045129E /* Main.storyboard */; };
 		5F677EF51A0AEC110045129E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F677EF41A0AEC110045129E /* Images.xcassets */; };
 		5F677EF81A0AEC110045129E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F677EF61A0AEC110045129E /* LaunchScreen.xib */; };
@@ -44,8 +44,8 @@
 		5F677EE91A0AEC110045129E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		5F677EEB1A0AEC110045129E /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
 		5F677EEC1A0AEC110045129E /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		5F677EEE1A0AEC110045129E /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		5F677EEF1A0AEC110045129E /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		5F677EEE1A0AEC110045129E /* HistoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
+		5F677EEF1A0AEC110045129E /* HistoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
 		5F677EF21A0AEC110045129E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5F677EF41A0AEC110045129E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5F677EF71A0AEC110045129E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -129,8 +129,8 @@
 				5F677EE91A0AEC110045129E /* AppDelegate.m */,
 				5F677EEB1A0AEC110045129E /* FirstViewController.h */,
 				5F677EEC1A0AEC110045129E /* FirstViewController.m */,
-				5F677EEE1A0AEC110045129E /* SecondViewController.h */,
-				5F677EEF1A0AEC110045129E /* SecondViewController.m */,
+				5F677EEE1A0AEC110045129E /* HistoryViewController.h */,
+				5F677EEF1A0AEC110045129E /* HistoryViewController.m */,
 				5FBCC6FE1A0B66D60072843F /* LoginViewController.h */,
 				5FBCC6FF1A0B66D60072843F /* LoginViewController.m */,
 				5F677EF11A0AEC110045129E /* Main.storyboard */,
@@ -327,7 +327,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F416022F1A0C2573001D8796 /* HistoryItem.m in Sources */,
-				5F677EF01A0AEC110045129E /* SecondViewController.m in Sources */,
+				5F677EF01A0AEC110045129E /* HistoryViewController.m in Sources */,
 				5F677EEA1A0AEC110045129E /* AppDelegate.m in Sources */,
 				5FBCC7001A0B66D60072843F /* LoginViewController.m in Sources */,
 				F416022B1A0B4324001D8796 /* MagicCardWallClient.m in Sources */,
