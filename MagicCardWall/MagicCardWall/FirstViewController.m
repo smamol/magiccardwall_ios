@@ -1,4 +1,4 @@
-//
+    //
 //  FirstViewController.m
 //  MagicCardWall
 //
@@ -36,6 +36,8 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+
+    [self becomeFirstResponder];
     
     if ([[Lockbox stringForKey:@"Token"] length] <= 0) {
         // force login
@@ -74,11 +76,44 @@
     
     self.previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.captureSession];
     self.previewLayer.frame = self.view.layer.bounds;
-    [self.view.layer addSublayer:self.previewLayer];
     
+    [self startScanning];
+}
+
+- (void)startScanning {
+    [self.view.layer addSublayer:self.previewLayer];
     [self.captureSession startRunning];
 }
 
+- (void)stopScanning {
+    [self.previewLayer removeFromSuperlayer];
+    [self.captureSession stopRunning];
+}
+
+#pragma mark - Shaky shaky
+- (BOOL)canBecomeFirstResponder {
+    return YES;
+}
+
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+    [self stopScanning];
+    
+    if (motion == UIEventSubtypeMotionShake) {
+        
+        [[MagicCardWallClient sharedInstance] incrementStateForTask:self.labelQRCodeResult.text undo:YES completion:^(BOOL success, NSError *error) {
+            if (success) {
+                [self playUndoSound];
+            }
+            else {
+                [self playErrorSound];
+            }
+        }];
+        
+        self.labelQRCodeResult.text = @"Attempting to undo";
+    }
+}
+
+#pragma mark - Rotation
 - (void)viewWillLayoutSubviews {
     self.previewLayer.frame = self.view.bounds;
 }
@@ -138,16 +173,14 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
     NSLog(@"QR Code: %@", QRCode);
     self.labelQRCodeResult.text = QRCode;
     
-    [self.previewLayer removeFromSuperlayer];
-    [self.captureSession stopRunning];
+    [self stopScanning];
     
     [[MagicCardWallClient sharedInstance] incrementStateForTask:QRCode undo:NO completion:^(BOOL success, NSError *error) {
         if (success) {
             [self playScanSound];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 //-- start again after a couple of second (long enough to show the scan result)
-                [self.captureSession startRunning];
-                [self.view.layer addSublayer:self.previewLayer];
+                [self startScanning];
             });
         }
         else {
@@ -157,6 +190,7 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
     
 }
 
+#pragma mark - Sound playing
 - (void)playScanSound {
     NSString *scanSoundPath = [[NSBundle mainBundle] pathForResource:@"scan_sound" ofType:@"wav"];
     NSURL *pewPewURL = [NSURL fileURLWithPath:scanSoundPath];
@@ -171,6 +205,12 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
     AudioServicesPlaySystemSound(self.scanSound);
 }
 
+- (void)playUndoSound {
+    NSString *scanSoundPath = [[NSBundle mainBundle] pathForResource:@"undo_sound" ofType:@"wav"];
+    NSURL *pewPewURL = [NSURL fileURLWithPath:scanSoundPath];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)pewPewURL, &_scanSound);
+    AudioServicesPlaySystemSound(self.scanSound);
+}
 
 
 @end

@@ -63,9 +63,8 @@
     
     [self.requestSerializer setValue:[Lockbox stringForKey:@"Token"] forHTTPHeaderField:@"Cookie"];
         
-    [self POST:[NSString stringWithFormat:@"/api/Status?issueId=%@&undo=%@", taskIdentifier, undo ? @"true" : @"false"] parameters:@{} success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self POST:[NSString stringWithFormat:@"/api/Status?issueId=%@&undo=%@", [taskIdentifier stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], undo ? @"true" : @"false"] parameters:@{} success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        NSLog(@"%@", task);
         NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
 
         NSLog(@"%i", [responseString boolValue]);
