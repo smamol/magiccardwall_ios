@@ -12,6 +12,17 @@
 
 @implementation MagicCardWallClient
 
++ (instancetype)sharedInstance {
+    static dispatch_once_t onceToken;
+    static MagicCardWallClient *instance;
+    dispatch_once(&onceToken, ^{
+        instance = [[MagicCardWallClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://tmlt218.trademe.local"]];
+    });
+    
+    return instance;
+}
+
+
 - (instancetype)initWithBaseURL:(NSURL *)url {
     self = [super initWithBaseURL:url];
     
