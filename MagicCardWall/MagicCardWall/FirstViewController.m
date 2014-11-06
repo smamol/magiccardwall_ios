@@ -83,6 +83,44 @@
     self.previewLayer.frame = self.view.bounds;
 }
 
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [CATransaction begin];
+    [CATransaction setAnimationDuration:duration];
+    [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    [self updatePreviewLayerForOrientation:toInterfaceOrientation];
+    [CATransaction commit];
+}
+
+- (void)updatePreviewLayerForOrientation:(UIInterfaceOrientation)interfaceOrientation;
+{
+    // correct position of previewLayer
+    CGSize newSize = self.view.bounds.size;
+    self.previewLayer.position = CGPointMake(0.5 * newSize.width, 0.5 * newSize.height);
+    
+    // rotate the previewLayer, in order to have camera picture right
+    switch (interfaceOrientation) {
+        case UIInterfaceOrientationPortrait:
+            [self.previewLayer setAffineTransform:CGAffineTransformMakeRotation(0)];
+            break;
+            
+        case UIInterfaceOrientationLandscapeLeft:
+            [self.previewLayer setAffineTransform:CGAffineTransformMakeRotation(M_PI/2)];
+            break;
+            
+        case UIInterfaceOrientationLandscapeRight:
+            [self.previewLayer setAffineTransform:CGAffineTransformMakeRotation(-M_PI/2)];
+            break;
+            
+        case UIDeviceOrientationPortraitUpsideDown:
+            [self.previewLayer setAffineTransform:CGAffineTransformMakeRotation(M_PI)];
+            break;
+            
+        default:
+            break;
+    }
+}
+
+
 #pragma mark - AVCaptureMetadataOutputObjectsDelegate
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput
