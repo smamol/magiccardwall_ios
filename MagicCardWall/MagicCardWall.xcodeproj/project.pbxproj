@@ -16,6 +16,7 @@
 		5F677EF51A0AEC110045129E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F677EF41A0AEC110045129E /* Images.xcassets */; };
 		5F677EF81A0AEC110045129E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F677EF61A0AEC110045129E /* LaunchScreen.xib */; };
 		5F677F041A0AEC110045129E /* MagicCardWallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F677F031A0AEC110045129E /* MagicCardWallTests.m */; };
+		5FBCC6FD1A0B60F80072843F /* scan_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5FBCC6FC1A0B60F80072843F /* scan_sound.wav */; };
 		F416022B1A0B4324001D8796 /* MagicCardWallClient.m in Sources */ = {isa = PBXBuildFile; fileRef = F416022A1A0B4324001D8796 /* MagicCardWallClient.m */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +48,7 @@
 		5F677EFD1A0AEC110045129E /* MagicCardWallTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MagicCardWallTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F677F021A0AEC110045129E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5F677F031A0AEC110045129E /* MagicCardWallTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MagicCardWallTests.m; sourceTree = "<group>"; };
+		5FBCC6FC1A0B60F80072843F /* scan_sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = scan_sound.wav; sourceTree = "<group>"; };
 		F41602291A0B4324001D8796 /* MagicCardWallClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicCardWallClient.h; sourceTree = "<group>"; };
 		F416022A1A0B4324001D8796 /* MagicCardWallClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicCardWallClient.m; sourceTree = "<group>"; };
 		F4741EA5DD0D448AD988E57F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,6 +131,7 @@
 		5F677EE41A0AEC110045129E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5FBCC6FC1A0B60F80072843F /* scan_sound.wav */,
 				5F677EE51A0AEC110045129E /* Info.plist */,
 				5F677EE61A0AEC110045129E /* main.m */,
 			);
@@ -244,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F677EF31A0AEC110045129E /* Main.storyboard in Resources */,
+				5FBCC6FD1A0B60F80072843F /* scan_sound.wav in Resources */,
 				5F677EF81A0AEC110045129E /* LaunchScreen.xib in Resources */,
 				5F677EF51A0AEC110045129E /* Images.xcassets in Resources */,
 			);

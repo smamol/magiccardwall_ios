@@ -7,13 +7,16 @@
 //
 
 @import AVFoundation;
+@import AudioToolbox;
 
 #import "FirstViewController.h"
 
 @interface FirstViewController () <AVCaptureMetadataOutputObjectsDelegate>
 
-@property (strong) AVCaptureSession *captureSession;
-@property (strong) AVCaptureVideoPreviewLayer *previewLayer;
+@property (strong, nonatomic) AVCaptureSession *captureSession;
+@property (strong, nonatomic) AVCaptureVideoPreviewLayer *previewLayer;
+
+@property SystemSoundID scanSound;
 
 @property (weak, nonatomic) IBOutlet UILabel *labelQRCodeResult;
 
@@ -80,7 +83,17 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
     self.labelQRCodeResult.text = QRCode;
     
     [self.previewLayer removeFromSuperlayer];
+    
+    [self playScanSound];
+    
     [self.captureSession stopRunning];
+}
+
+- (void)playScanSound {
+    NSString *scanSoundPath = [[NSBundle mainBundle] pathForResource:@"scan_sound" ofType:@"wav"];
+    NSURL *pewPewURL = [NSURL fileURLWithPath:scanSoundPath];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)pewPewURL, &_scanSound);
+    AudioServicesPlaySystemSound(self.scanSound);
 }
 
 
