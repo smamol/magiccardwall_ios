@@ -26,4 +26,20 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (BOOL)canBecomeFirstResponder {
+    return YES;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [self becomeFirstResponder];
+}
+
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+    if (motion == UIEventSubtypeMotionShake) {
+        self.labelShakeIt.text = @"I Shook It!";
+    }
+}
+
+
+
 @end
