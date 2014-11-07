@@ -87,13 +87,16 @@
     [cell.imageViewGravatar setImageWithURL:imageURL];
     
     if ([historyItem.type isEqualToString:@"Dev"]) {
-        cell.viewType.backgroundColor = [UIColor redColor];
+        cell.viewType.backgroundColor = [UIColor colorWithRed:85.0 / 255.0 green:146.0 / 255.0 blue:187.0 / 255.0 alpha:1];
     }
     else if ([historyItem.type isEqualToString:@"Design"])  {
-        cell.viewType.backgroundColor = [UIColor greenColor];
+        cell.viewType.backgroundColor = [UIColor colorWithRed:188.0 / 255.0 green:180.0 / 255.0 blue:192.0 / 255.0 alpha:1];
+    }
+    else if ([historyItem.type isEqualToString:@"Test"])  {
+        cell.viewType.backgroundColor = [UIColor colorWithRed:240.0 / 255.0 green:240.0 / 255.0 blue:240.0 / 255.0 alpha:1];
     }
     else {
-        cell.viewType.backgroundColor = [UIColor blueColor];
+        cell.viewType.backgroundColor = [UIColor blackColor];
     }
     
     return cell;
