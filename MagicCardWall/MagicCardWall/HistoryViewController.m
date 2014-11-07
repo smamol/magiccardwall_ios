@@ -83,6 +83,15 @@
     cell.labelMessage.text = [NSString stringWithFormat:@"%@ has moved %@ into %@", historyItem.username, historyItem.title, historyItem.status];
     cell.labelTimestamp.text = historyItem.timestamp;
     
+    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:cell.labelMessage.text];
+    NSInteger start = 11 + historyItem.username.length;
+    UIFont *boldFont = [UIFont boldSystemFontOfSize:16];
+    NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                           boldFont, NSFontAttributeName, nil];
+
+    [string addAttributes:attrs range:NSMakeRange(start, historyItem.title.length)];
+    cell.labelMessage.attributedText = string;
+    
     NSURL *imageURL = [NSURL URLWithString:historyItem.avatarUrl];
     [cell.imageViewGravatar setImageWithURL:imageURL];
     
