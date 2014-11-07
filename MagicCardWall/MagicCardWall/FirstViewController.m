@@ -136,7 +136,7 @@
                 [[MagicCardWallClient sharedInstance] incrementStateForTask:self.lastReadQRCode undo:YES completion:^(BOOL success, NSError *error) {
                     if (success) {
                         self.labelStatus.text = [NSString stringWithFormat:@"Your task (%@) has been moved back successfully.", self.lastReadQRCode];
-                        self.imageViewStatus.image = [UIImage imageNamed:@"undo.png"];
+                        self.imageViewStatus.image = [[UIImage imageNamed:@"undo.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
                         [UIView animateWithDuration:0.2f animations:^{
                             self.viewStatusContainer.alpha = 1.0f;
                         }];
@@ -214,7 +214,8 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
         [[MagicCardWallClient sharedInstance] incrementStateForTask:QRCode undo:NO completion:^(BOOL success, NSError *error) {
             if (success) {
                 self.labelStatus.text = [NSString stringWithFormat:@"Your task (%@) has been moved forward successfully.", QRCode];
-                self.imageViewStatus.image = [UIImage imageNamed:@"tick.png"];
+                self.imageViewStatus.image = [[UIImage imageNamed:@"tick.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+                self.imageViewStatus.tintColor = [UIColor whiteColor];
                 [UIView animateWithDuration:0.2f animations:^{
                     self.viewStatusContainer.alpha = 1.0f;
                 }];
