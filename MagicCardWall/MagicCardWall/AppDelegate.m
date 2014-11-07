@@ -22,6 +22,11 @@
     
 //    [Lockbox setString:@"" forKey:@"Token"];
     
+    [[UINavigationBar appearance] setBarTintColor:[UIColor
+                                                   colorWithRed:229/255.0 green:123/255.0 blue:82.0/255.0 alpha:1.0f]];
+    [[UITabBar appearance] setTintColor:[UIColor
+                                            colorWithRed:229/255.0 green:123/255.0 blue:82.0/255.0 alpha:1.0f]];
+    
     return YES;
 }
 
