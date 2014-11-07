@@ -5,7 +5,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Magic Scan-->
+        <!--First View Controller-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
                 <viewController id="9pv-A4-QxB" customClass="FirstViewController" sceneMemberID="viewController">
@@ -39,7 +39,7 @@
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="996-Yb-jyu">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pVg-p0-3Pa">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tick.png" translatesAutoresizingMaskIntoConstraints="NO" id="pVg-p0-3Pa">
                                         <rect key="frame" x="8" y="8" width="48" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="0q8-Ah-zo0"/>
@@ -71,11 +71,23 @@
                                 <rect key="frame" x="149" y="150" width="300" height="300"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan code to move task" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0DN-Sv-qgD">
-                                        <rect key="frame" x="57" y="139" width="187" height="21"/>
+                                        <rect key="frame" x="57" y="139" width="186.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="corner.png" translatesAutoresizingMaskIntoConstraints="NO" id="bPx-9z-sSE">
+                                        <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="corner.png" translatesAutoresizingMaskIntoConstraints="NO" id="yHg-Lo-Kga">
+                                        <rect key="frame" x="252" y="0.0" width="48" height="48"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="corner.png" translatesAutoresizingMaskIntoConstraints="NO" id="fbE-lv-96s">
+                                        <rect key="frame" x="252" y="252" width="48" height="48"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="corner.png" translatesAutoresizingMaskIntoConstraints="NO" id="cod-y1-mxI">
+                                        <rect key="frame" x="0.0" y="252" width="48" height="48"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -100,8 +112,11 @@
                             <constraint firstAttribute="centerX" secondItem="rl8-Nr-eS9" secondAttribute="centerX" id="yvH-94-MOp"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Magic Scan" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" systemItem="search" id="acW-dT-cKf"/>
                     <connections>
+                        <outlet property="imageViewCornerBottomLeft" destination="cod-y1-mxI" id="3zw-AP-ZtF"/>
+                        <outlet property="imageViewCornerBottomRight" destination="fbE-lv-96s" id="tTS-TN-gjq"/>
+                        <outlet property="imageViewCornerTopRight" destination="yHg-Lo-Kga" id="Kmp-aM-QK9"/>
                         <outlet property="imageViewStatus" destination="pVg-p0-3Pa" id="cww-pm-ri4"/>
                         <outlet property="labelQRCodeResult" destination="L82-ay-sCS" id="hHd-c6-q9p"/>
                         <outlet property="labelStatus" destination="chJ-Xa-I0R" id="ZBV-T8-vYW"/>
@@ -114,10 +129,10 @@
             </objects>
             <point key="canvasLocation" x="750" y="-320"/>
         </scene>
-        <!--Table View Controller-->
+        <!--History-->
         <scene sceneID="ueF-4V-FyO">
             <objects>
-                <tableViewController id="UBq-8m-Ebd" sceneMemberID="viewController">
+                <tableViewController title="History" id="UBq-8m-Ebd" customClass="HistoryViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Ov2-3M-pFU">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -135,7 +150,7 @@
                             <outlet property="delegate" destination="UBq-8m-Ebd" id="2rK-FH-Yz7"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="HJl-ZS-akk"/>
+                    <navigationItem key="navigationItem" title="History" id="HJl-ZS-akk"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SDM-Ve-FOC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -234,11 +249,11 @@
             </objects>
             <point key="canvasLocation" x="-208" y="6"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="aL7-jH-ud6">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Gr4-pT-3i1" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="ii7-wx-Fj2"/>
+                    <tabBarItem key="tabBarItem" systemItem="history" id="ii7-wx-Fj2"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2vR-RX-xcR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -255,6 +270,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
+        <image name="corner.png" width="48" height="48"/>
+        <image name="tick.png" width="48" height="48"/>
     </resources>
 </document>

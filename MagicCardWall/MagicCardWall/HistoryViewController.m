@@ -9,10 +9,13 @@
 #import "HistoryViewController.h"
 
 #import "MagicCardWallClient.h"
+#import "HistoryItem.h"
 
 @interface HistoryViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *labelShakeIt;
+
+@property (strong, nonatomic) NSArray *arrayOfHistoryItems;
 
 @end
 
@@ -20,7 +23,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    [[MagicCardWallClient sharedInstance] getHistoryWithCompletion:^(NSArray *arrayOfHistoryItems, NSError *error) {
+        if (error) {
+            NSLog(@"Error getting the history items %@", [error localizedDescription]);
+        }
+        else {
+            NSLog(@"Got %ul items", [arrayOfHistoryItems count]);
+            self.arrayOfHistoryItems = arrayOfHistoryItems;
+            
+            [self.tableView reloadData];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -28,7 +42,16 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellIdentifier"];
+    
+    HistoryItem *historyItem = self.arrayOfHistoryItems[indexPath.row];
+    cell.textLabel.text = historyItem.username;
+    cell.detailTextLabel.text = historyItem.timestamp;
+    
+    return cell;
+}
 
 
 @end

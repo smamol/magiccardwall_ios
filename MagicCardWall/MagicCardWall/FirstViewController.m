@@ -16,6 +16,11 @@
 
 @interface FirstViewController () <AVCaptureMetadataOutputObjectsDelegate>
 
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewCornerBottomRight;
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewCornerBottomLeft;
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewCornerTopRight;
+
+
 @property (strong, nonatomic) AVCaptureSession *captureSession;
 @property (strong, nonatomic) AVCaptureVideoPreviewLayer *previewLayer;
 
@@ -35,6 +40,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     // Should I log in?
+
+    CGAffineTransform topRightTransform =CGAffineTransformMakeRotation(M_PI/2);
+    self.imageViewCornerTopRight.transform = topRightTransform;
+    
+    CGAffineTransform bottomLeftTransform =CGAffineTransformMakeRotation(-M_PI/2);
+    self.imageViewCornerBottomLeft.transform = bottomLeftTransform;
+    
+    CGAffineTransform bottomRightTransform =CGAffineTransformMakeRotation(-M_PI);
+    self.imageViewCornerBottomRight.transform = bottomRightTransform;
 
 }
 

@@ -18,5 +18,6 @@
 
 - (void)incrementStateForTask:(NSString *)taskIdentifier undo:(BOOL)undo completion:(void (^)(BOOL success, NSError *error))completion;
 
+- (void)getHistoryWithCompletion:(void (^)(NSArray *arrayOfHistoryItems, NSError *error))completion;
 
 @end
