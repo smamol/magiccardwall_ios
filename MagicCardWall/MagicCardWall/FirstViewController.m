@@ -51,6 +51,7 @@
     CGAffineTransform bottomRightTransform =CGAffineTransformMakeRotation(-M_PI);
     self.imageViewCornerBottomRight.transform = bottomRightTransform;
     
+    [Lockbox setString:@"" forKey:@"Token"];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
