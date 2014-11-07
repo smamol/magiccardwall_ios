@@ -14,6 +14,10 @@
 @interface HistoryItemCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewGravatar;
+@property (weak, nonatomic) IBOutlet UILabel *labelMessage;
+@property (weak, nonatomic) IBOutlet UILabel *labelTimestamp;
+
+
 @end
 
 @implementation HistoryItemCell
