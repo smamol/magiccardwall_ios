@@ -37,17 +37,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="996-Yb-jyu">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="84"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tick.png" translatesAutoresizingMaskIntoConstraints="NO" id="pVg-p0-3Pa">
-                                        <rect key="frame" x="8" y="8" width="48" height="48"/>
+                                        <rect key="frame" x="8" y="28" width="48" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="0q8-Ah-zo0"/>
                                             <constraint firstAttribute="width" constant="48" id="8wF-iS-Vw8"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your task has been moved successfully" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chJ-Xa-I0R">
-                                        <rect key="frame" x="64" y="8" width="528" height="48"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your task has been moved successfully" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chJ-Xa-I0R">
+                                        <rect key="frame" x="64" y="28" width="528" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="L6t-wT-yaP"/>
                                         </constraints>
@@ -56,15 +56,14 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.89803921568627454" green="0.4823529411764706" blue="0.32156862745098042" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="chJ-Xa-I0R" secondAttribute="trailing" constant="8" id="6OQ-cF-V4t"/>
                                     <constraint firstItem="chJ-Xa-I0R" firstAttribute="leading" secondItem="996-Yb-jyu" secondAttribute="leading" constant="64" id="6Sk-5A-Y7F"/>
-                                    <constraint firstItem="chJ-Xa-I0R" firstAttribute="top" secondItem="996-Yb-jyu" secondAttribute="top" constant="8" id="BHv-QP-4ro"/>
-                                    <constraint firstItem="pVg-p0-3Pa" firstAttribute="top" secondItem="996-Yb-jyu" secondAttribute="top" constant="8" id="RoF-DF-yJZ"/>
+                                    <constraint firstItem="chJ-Xa-I0R" firstAttribute="top" secondItem="996-Yb-jyu" secondAttribute="top" constant="28" id="BHv-QP-4ro"/>
+                                    <constraint firstItem="pVg-p0-3Pa" firstAttribute="top" secondItem="996-Yb-jyu" secondAttribute="top" constant="28" id="RoF-DF-yJZ"/>
                                     <constraint firstItem="pVg-p0-3Pa" firstAttribute="leading" secondItem="996-Yb-jyu" secondAttribute="leading" constant="8" id="SsL-al-YO9"/>
-                                    <constraint firstAttribute="height" constant="64" id="pM7-kr-e0W"/>
-                                    <constraint firstAttribute="trailing" secondItem="pVg-p0-3Pa" secondAttribute="trailing" constant="544" id="tTy-06-K8V"/>
+                                    <constraint firstAttribute="height" constant="84" id="pM7-kr-e0W"/>
                                 </constraints>
                             </view>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wtd-W1-Kex">

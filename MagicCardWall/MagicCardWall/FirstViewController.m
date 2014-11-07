@@ -130,18 +130,23 @@
     if (motion == UIEventSubtypeMotionShake) {
         
         if ([self.lastReadQRCode length] > 0) {
-            [[MagicCardWallClient sharedInstance] incrementStateForTask:self.lastReadQRCode undo:YES completion:^(BOOL success, NSError *error) {
-                if (success) {
-                    self.labelStatus.text = [NSString stringWithFormat:@"Your task (%@) has been moved back successfully.", self.lastReadQRCode];
-                    [UIView animateWithDuration:0.2f animations:^{
-                        self.viewStatusContainer.alpha = 1.0f;
-                    }];
-                    
-                    [self playUndoSound];
-                }
-                else {
-                    [self playErrorSound];
-                }
+            [UIView animateWithDuration:0.2f animations:^{
+                self.viewStatusContainer.alpha = 0.0f;
+            } completion:^(BOOL finished) {
+                [[MagicCardWallClient sharedInstance] incrementStateForTask:self.lastReadQRCode undo:YES completion:^(BOOL success, NSError *error) {
+                    if (success) {
+                        self.labelStatus.text = [NSString stringWithFormat:@"Your task (%@) has been moved back successfully.", self.lastReadQRCode];
+                        self.imageViewStatus.image = [UIImage imageNamed:@"undo.png"];
+                        [UIView animateWithDuration:0.2f animations:^{
+                            self.viewStatusContainer.alpha = 1.0f;
+                        }];
+                        
+                        [self playUndoSound];
+                    }
+                    else {
+                        [self playErrorSound];
+                    }
+                }];
             }];
         }
         
@@ -203,25 +208,29 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
     
     [self stopScanning];
     
-    [[MagicCardWallClient sharedInstance] incrementStateForTask:QRCode undo:NO completion:^(BOOL success, NSError *error) {
-        if (success) {
-            self.labelStatus.text = [NSString stringWithFormat:@"Your task (%@) has been moved forward successfully.", QRCode];
-            [UIView animateWithDuration:0.2f animations:^{
-                self.viewStatusContainer.alpha = 1.0f;
-            }];
-            
-            [self playScanSound];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                //-- start again after a couple of second (long enough to show the scan result)
+    [UIView animateWithDuration:0.2f animations:^{
+        self.viewStatusContainer.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        [[MagicCardWallClient sharedInstance] incrementStateForTask:QRCode undo:NO completion:^(BOOL success, NSError *error) {
+            if (success) {
+                self.labelStatus.text = [NSString stringWithFormat:@"Your task (%@) has been moved forward successfully.", QRCode];
+                self.imageViewStatus.image = [UIImage imageNamed:@"tick.png"];
+                [UIView animateWithDuration:0.2f animations:^{
+                    self.viewStatusContainer.alpha = 1.0f;
+                }];
+                
+                [self playScanSound];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    //-- start again after a couple of second (long enough to show the scan result)
+                    [self startScanning];
+                });
+            }
+            else {
+                [self playErrorSound];
                 [self startScanning];
-            });
-        }
-        else {
-            [self playErrorSound];
-            [self startScanning];
-        }
+            }
+        }];
     }];
-    
 }
 
 #pragma mark - Sound playing
