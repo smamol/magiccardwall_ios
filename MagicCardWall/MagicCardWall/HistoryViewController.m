@@ -14,6 +14,7 @@
 
 @interface HistoryItemCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIView *viewType;
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewGravatar;
 @property (weak, nonatomic) IBOutlet UILabel *labelMessage;
 @property (weak, nonatomic) IBOutlet UILabel *labelTimestamp;
@@ -84,6 +85,16 @@
     
     NSURL *imageURL = [NSURL URLWithString:historyItem.avatarUrl];
     [cell.imageViewGravatar setImageWithURL:imageURL];
+    
+    if ([historyItem.type isEqualToString:@"Dev"]) {
+        cell.viewType.backgroundColor = [UIColor redColor];
+    }
+    else if ([historyItem.type isEqualToString:@"Design"])  {
+        cell.viewType.backgroundColor = [UIColor greenColor];
+    }
+    else {
+        cell.viewType.backgroundColor = [UIColor blueColor];
+    }
     
     return cell;
 }
