@@ -1,4 +1,4 @@
-    //
+//
 //  FirstViewController.m
 //  MagicCardWall
 //
@@ -23,6 +23,7 @@
 
 @property (strong, nonatomic) AVCaptureSession *captureSession;
 @property (strong, nonatomic) AVCaptureVideoPreviewLayer *previewLayer;
+@property (strong, nonatomic) NSString *lastReadQRCode;
 
 @property SystemSoundID scanSound;
 
@@ -40,7 +41,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     // Should I log in?
-
+    
     CGAffineTransform topRightTransform =CGAffineTransformMakeRotation(M_PI/2);
     self.imageViewCornerTopRight.transform = topRightTransform;
     
@@ -49,17 +50,20 @@
     
     CGAffineTransform bottomRightTransform =CGAffineTransformMakeRotation(-M_PI);
     self.imageViewCornerBottomRight.transform = bottomRightTransform;
-
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-
+    
     [self becomeFirstResponder];
     
     if ([[Lockbox stringForKey:@"Token"] length] <= 0) {
         // force login
         [self performSegueWithIdentifier:@"login" sender:self];
+    }
+    else {
+        [self scanQRCode];
     }
 }
 
@@ -95,15 +99,15 @@
     self.previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.captureSession];
     self.previewLayer.frame = self.view.layer.bounds;
     
-    [self startScanning];
-}
-
-- (void)startScanning {
     [self.view.layer addSublayer:self.previewLayer];
     
     [self.view bringSubviewToFront:self.viewStatusContainer];
     [self.view bringSubviewToFront:self.viewViewFinderContainer];
     
+    [self startScanning];
+}
+
+- (void)startScanning {
     [self.captureSession startRunning];
     
     [UIView animateWithDuration:0.2f animations:^{
@@ -113,12 +117,6 @@
 
 - (void)stopScanning {
     [self.captureSession stopRunning];
-    
-    [UIView animateWithDuration:0.2f animations:^{
-        self.viewViewFinderContainer.alpha = 0.0f;
-    } completion:^(BOOL finished) {
-        [self.previewLayer removeFromSuperlayer];
-    }];
 }
 
 #pragma mark - Shaky shaky
@@ -127,20 +125,27 @@
 }
 
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
-    [self stopScanning];
+    //    [self stopScanning];
     
     if (motion == UIEventSubtypeMotionShake) {
         
-        [[MagicCardWallClient sharedInstance] incrementStateForTask:self.labelQRCodeResult.text undo:YES completion:^(BOOL success, NSError *error) {
-            if (success) {
-                [self playUndoSound];
-            }
-            else {
-                [self playErrorSound];
-            }
-        }];
+        if ([self.lastReadQRCode length] > 0) {
+            [[MagicCardWallClient sharedInstance] incrementStateForTask:self.lastReadQRCode undo:YES completion:^(BOOL success, NSError *error) {
+                if (success) {
+                    self.labelStatus.text = [NSString stringWithFormat:@"Your task (%@) has been moved back successfully.", self.lastReadQRCode];
+                    [UIView animateWithDuration:0.2f animations:^{
+                        self.viewStatusContainer.alpha = 1.0f;
+                    }];
+                    
+                    [self playUndoSound];
+                }
+                else {
+                    [self playErrorSound];
+                }
+            }];
+        }
         
-        self.labelQRCodeResult.text = @"Attempting to undo";
+//        self.labelQRCodeResult.text = @"Attempting to undo";
     }
 }
 
@@ -193,20 +198,27 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
     }
     
     NSLog(@"QR Code: %@", QRCode);
+    self.lastReadQRCode = QRCode;
     self.labelQRCodeResult.text = QRCode;
     
     [self stopScanning];
     
     [[MagicCardWallClient sharedInstance] incrementStateForTask:QRCode undo:NO completion:^(BOOL success, NSError *error) {
         if (success) {
+            self.labelStatus.text = [NSString stringWithFormat:@"Your task (%@) has been moved forward successfully.", QRCode];
+            [UIView animateWithDuration:0.2f animations:^{
+                self.viewStatusContainer.alpha = 1.0f;
+            }];
+            
             [self playScanSound];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 //-- start again after a couple of second (long enough to show the scan result)
                 [self startScanning];
             });
         }
         else {
             [self playErrorSound];
+            [self startScanning];
         }
     }];
     

@@ -62,6 +62,7 @@
 }
 
 - (void)incrementStateForTask:(NSString *)taskIdentifier undo:(BOOL)undo completion:(void (^)(BOOL success, NSError *error))completion {
+    [self.requestSerializer setValue:[Lockbox stringForKey:@"Token"] forHTTPHeaderField:@"Cookie"];
     [self POST:[NSString stringWithFormat:@"/api/Status?issueId=%@&undo=%@", [taskIdentifier stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], undo ? @"true" : @"false"] parameters:@{} success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
@@ -77,6 +78,7 @@
 }
 
 - (void)getHistoryWithCompletion:(void (^)(NSArray *arrayOfHistoryItems, NSError *error))completion {
+    [self.requestSerializer setValue:[Lockbox stringForKey:@"Token"] forHTTPHeaderField:@"Cookie"];
     [self GET:@"/api/History" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSArray *arrayOfItems = (NSArray *)responseObject;
         NSMutableArray *arrayOfProcessedItems = [[NSMutableArray alloc] init];
