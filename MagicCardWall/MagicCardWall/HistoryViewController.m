@@ -8,6 +8,7 @@
 
 #import "HistoryViewController.h"
 
+#import "UIImageView+AFNetworking.h"
 #import "MagicCardWallClient.h"
 #import "HistoryItem.h"
 
@@ -75,11 +76,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellIdentifier"];
+    HistoryItemCell *cell = (HistoryItemCell *) [tableView dequeueReusableCellWithIdentifier:@"CellIdentifier"];
     
     HistoryItem *historyItem = self.arrayOfHistoryItems[indexPath.row];
-    cell.textLabel.text = historyItem.username;
-    cell.detailTextLabel.text = historyItem.timestamp;
+    cell.labelMessage.text = [NSString stringWithFormat:@"%@ has moved %@ into %@", historyItem.username, historyItem.title, historyItem.status];
+    cell.labelTimestamp.text = historyItem.timestamp;
+    
+    NSURL *imageURL = [NSURL URLWithString:historyItem.avatarUrl];
+    [cell.imageViewGravatar setImageWithURL:imageURL];
     
     return cell;
 }

@@ -16,6 +16,8 @@
 @property (strong, nonatomic) NSString *status;
 @property (strong, nonatomic) NSString *avatarUrl;
 @property (strong, nonatomic) NSString *username;
+@property (strong, nonatomic) NSString *type;
+
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

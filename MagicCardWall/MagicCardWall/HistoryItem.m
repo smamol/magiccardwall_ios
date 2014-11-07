@@ -20,6 +20,7 @@
         _status = dictionary[@"Status"];
         _avatarUrl = dictionary[@"AvatarUrl"];
         _username = dictionary[@"Username"];
+        _type = dictionary[@"Type"];
     }
     
     return self;

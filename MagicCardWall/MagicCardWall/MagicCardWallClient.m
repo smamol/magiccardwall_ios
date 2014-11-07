@@ -84,6 +84,7 @@
         NSMutableArray *arrayOfProcessedItems = [[NSMutableArray alloc] init];
         
         for (NSDictionary *dictionary in arrayOfItems) {
+            NSLog(@"%@", dictionary);
             [arrayOfProcessedItems addObject:[[HistoryItem alloc] initWithDictionary:dictionary]];
         }
         
